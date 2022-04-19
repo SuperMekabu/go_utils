@@ -18,6 +18,15 @@ func Map[T any, M any](src []T, fn func(T) M) []M {
 	return ret
 }
 
+func Includes[T comparable](src []T, tgt T) bool {
+	for _, v := range src {
+		if v == tgt {
+			return true
+		}
+	}
+	return false
+}
+
 func Remove[T comparable](src []T, tgt T) []T {
 	for i, v := range src {
 		if v == tgt {
