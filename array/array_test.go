@@ -282,7 +282,7 @@ func TestIncludes(t *testing.T) {
 
 }
 
-func TestRemove(t *testing.T) {
+func TestRemoveFirst(t *testing.T) {
 	type args[T comparable] struct {
 		src []T
 		tgt T
@@ -302,6 +302,14 @@ func TestRemove(t *testing.T) {
 				"2",
 			},
 			want: []string{"1", "3"},
+		},
+		{
+			name: "string OK2",
+			args: args[string]{
+				[]string{"2", "2", "3"},
+				"2",
+			},
+			want: []string{"2", "3"},
 		},
 	}
 
@@ -334,24 +342,124 @@ func TestRemove(t *testing.T) {
 
 	for _, tt := range stringTests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Remove(tt.args.src, tt.args.tgt); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Remove() = %v, want %v", got, tt.want)
+			if got := RemoveFirst(tt.args.src, tt.args.tgt); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("RemoveFirst() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 
 	for _, tt := range intTests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Remove(tt.args.src, tt.args.tgt); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Remove() = %v, want %v", got, tt.want)
+			if got := RemoveFirst(tt.args.src, tt.args.tgt); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("RemoveFirst() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 
 	for _, tt := range orgTests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Remove(tt.args.src, tt.args.tgt); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Remove() = %v, want %v", got, tt.want)
+			if got := RemoveFirst(tt.args.src, tt.args.tgt); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("RemoveFirst() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+
+}
+
+func TestRemoveAll(t *testing.T) {
+	type args[T comparable] struct {
+		src []T
+		tgt T
+	}
+
+	type test[K comparable] struct {
+		name string
+		args args[K]
+		want []K
+	}
+
+	stringTests := []test[string]{
+		{
+			name: "string OK",
+			args: args[string]{
+				[]string{"1", "2", "3"},
+				"2",
+			},
+			want: []string{"1", "3"},
+		},
+		{
+			name: "string OK2",
+			args: args[string]{
+				[]string{"2", "2", "3"},
+				"2",
+			},
+			want: []string{"3"},
+		},
+	}
+
+	intTests := []test[int]{
+		{
+			name: "int OK",
+			args: args[int]{
+				[]int{1, 2, 3},
+				2,
+			},
+			want: []int{1, 3},
+		},
+		{
+			name: "int OK2",
+			args: args[int]{
+				[]int{2, 2, 3},
+				2,
+			},
+			want: []int{3},
+		},
+	}
+
+	type original struct {
+		id   int
+		name string
+	}
+
+	orgTests := []test[original]{
+		{
+			name: "original OK",
+			args: args[original]{
+				[]original{{1, "john"}, {2, "jack"}, {3, "jade"}},
+				original{2, "jack"},
+			},
+			want: []original{{1, "john"}, {3, "jade"}},
+		},
+		{
+			name: "original OK2",
+			args: args[original]{
+				[]original{{2, "jack"}, {2, "jack"}, {3, "jade"}},
+				original{2, "jack"},
+			},
+			want: []original{{3, "jade"}},
+		},
+	}
+
+	for _, tt := range stringTests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := RemoveAll(tt.args.src, tt.args.tgt); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("RemoveAll() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+
+	for _, tt := range intTests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := RemoveAll(tt.args.src, tt.args.tgt); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("RemoveAll() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+
+	for _, tt := range orgTests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := RemoveAll(tt.args.src, tt.args.tgt); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("RemoveAll() = %v, want %v", got, tt.want)
 			}
 		})
 	}

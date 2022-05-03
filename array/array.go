@@ -27,11 +27,30 @@ func Includes[T comparable](src []T, tgt T) bool {
 	return false
 }
 
-func Remove[T comparable](src []T, tgt T) []T {
+func RemoveFirst[T comparable](src []T, tgt T) []T {
 	for i, v := range src {
 		if v == tgt {
 			return src[:i+copy(src[i:], src[i+1:])]
 		}
 	}
 	return src
+}
+
+func RemoveAll[T comparable](src []T, tgt T) []T {
+	tmp := src
+	found := false
+	for {
+		found = false
+		for i, v := range tmp {
+			if v == tgt {
+				tmp = tmp[:i+copy(src[i:], tmp[i+1:])]
+				found = true
+				break
+			}
+		}
+		if !found {
+			break
+		}
+	}
+	return tmp
 }
