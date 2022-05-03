@@ -6,16 +6,17 @@
 
 #### Filter
 
-- filter
+- Filter
 
 #### Map
 
-- map
+- Map
 
 #### Includes
 
-- includes
+- Includes
 
 #### Remove
 
-- remove
+- RemoveFirst
+- RemoveAll
