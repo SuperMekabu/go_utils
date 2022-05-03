@@ -38,8 +38,9 @@ func RemoveFirst[T comparable](src []T, tgt T) []T {
 
 func RemoveAll[T comparable](src []T, tgt T) []T {
 	tmp := src
+	found := false
 	for {
-		found := false
+		found = false
 		for i, v := range tmp {
 			if v == tgt {
 				tmp = tmp[:i+copy(src[i:], tmp[i+1:])]
