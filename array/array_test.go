@@ -465,3 +465,157 @@ func TestRemoveAll(t *testing.T) {
 	}
 
 }
+
+func TestEvery(t *testing.T) {
+	type args[T any] struct {
+		src []T
+		fn  func(T) bool
+	}
+
+	type test[K any] struct {
+		name string
+		args args[K]
+		want bool
+	}
+
+	stringTests := []test[string]{
+		{
+			name: "string OK",
+			args: args[string]{
+				[]string{"1", "2", "3"},
+				func(t string) bool {
+					parse, err := strconv.Atoi(t)
+					if err != nil {
+						return false
+					}
+					return parse < 4
+				},
+			},
+			want: true,
+		}, {
+			name: "string OK2",
+			args: args[string]{
+				[]string{"1", "2", "3"},
+				func(t string) bool {
+					return t == "2"
+				},
+			},
+			want: false,
+		},
+	}
+
+	intTests := []test[int]{
+		{
+			name: "int OK",
+			args: args[int]{
+				[]int{2, 4, 6},
+				func(t int) bool {
+					return t%2 == 0
+				},
+			},
+			want: true,
+		}, {
+			name: "int OK2",
+			args: args[int]{
+				[]int{1, 2, 3, 4, 5},
+				func(t int) bool {
+					return t%2 == 0
+				},
+			},
+			want: false,
+		},
+	}
+
+	for _, tt := range stringTests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Every(tt.args.src, tt.args.fn); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Every() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+
+	for _, tt := range intTests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Every(tt.args.src, tt.args.fn); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Every() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestSome(t *testing.T) {
+	type args[T any] struct {
+		src []T
+		fn  func(T) bool
+	}
+
+	type test[K any] struct {
+		name string
+		args args[K]
+		want bool
+	}
+
+	stringTests := []test[string]{
+		{
+			name: "string OK",
+			args: args[string]{
+				[]string{"1", "2", "3"},
+				func(t string) bool {
+					parse, err := strconv.Atoi(t)
+					if err != nil {
+						return false
+					}
+					return parse > 3
+				},
+			},
+			want: false,
+		}, {
+			name: "string OK2",
+			args: args[string]{
+				[]string{"1", "2", "3"},
+				func(t string) bool {
+					return t == "2"
+				},
+			},
+			want: true,
+		},
+	}
+
+	intTests := []test[int]{
+		{
+			name: "int OK",
+			args: args[int]{
+				[]int{1, 3, 5},
+				func(t int) bool {
+					return t%2 == 0
+				},
+			},
+			want: false,
+		}, {
+			name: "int OK2",
+			args: args[int]{
+				[]int{1, 2, 3, 4, 5},
+				func(t int) bool {
+					return t%2 == 0
+				},
+			},
+			want: true,
+		},
+	}
+
+	for _, tt := range stringTests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Some(tt.args.src, tt.args.fn); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Some() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+
+	for _, tt := range intTests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Some(tt.args.src, tt.args.fn); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Some() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

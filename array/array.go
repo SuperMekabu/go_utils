@@ -54,3 +54,21 @@ func RemoveAll[T comparable](src []T, tgt T) []T {
 	}
 	return tmp
 }
+
+func Every[T any](src []T, fn func(T) bool) bool {
+	for _, v := range src {
+		if !fn(v) {
+			return false
+		}
+	}
+	return true
+}
+
+func Some[T any](src []T, fn func(T) bool) bool {
+	for _, v := range src {
+		if fn(v) {
+			return true
+		}
+	}
+	return false
+}
