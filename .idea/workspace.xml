@@ -105,10 +105,22 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="rename Remove to RemoveFirst&#10;add RemoveAll" />
     <MESSAGE value="add id generators" />
-    <option name="LAST_COMMIT_MESSAGE" value="add id generators" />
+    <MESSAGE value="ああああああaaaa" />
+    <option name="LAST_COMMIT_MESSAGE" value="ああああああaaaa" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
