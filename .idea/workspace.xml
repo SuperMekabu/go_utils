@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a253aeb1-0bc9-4422-9e40-ce4234ca20da" name="Changes" comment="" />
+    <list default="true" id="a253aeb1-0bc9-4422-9e40-ce4234ca20da" name="Changes" comment="aaaaaaaaaaaaaaaa">
+      <change afterPath="$PROJECT_DIR$/ids/ids_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/maps.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/maps_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/array/array.go" beforeDir="false" afterPath="$PROJECT_DIR$/slices/slices.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/array/array_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/slices/slices_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/id/id.go" beforeDir="false" afterPath="$PROJECT_DIR$/ids/ids.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/id/id_test.go" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,10 +60,11 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
-  <component name="RunManager" selected="Go Test.Test_objHash in github.com/supermekabu/go_utils/id">
+  <component name="RunManager" selected="Go Test.go test go_utils_maps">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="go_utils" />
       <working_directory value="$PROJECT_DIR$" />
@@ -61,18 +72,6 @@
       <kind value="FILE" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Test_objHash in github.com/supermekabu/go_utils/id" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="go_utils" />
-      <working_directory value="$PROJECT_DIR$/id" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/supermekabu/go_utils/id" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTest_objHash\E$" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
@@ -85,21 +84,42 @@
       <framework value="gotest" />
       <method v="2" />
     </configuration>
-    <configuration name="go test go_utils" type="GoTestRunConfiguration" factoryName="Go Test" nameIsGenerated="true">
+    <configuration name="go test go_utils_array" type="GoTestRunConfiguration" factoryName="Go Test">
       <module name="go_utils" />
       <working_directory value="$PROJECT_DIR$" />
-      <go_parameters value="-i" />
-      <kind value="DIRECTORY" />
+      <kind value="PACKAGE" />
+      <package value="github.com/supermekabu/go_utils/slices" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Go Test.Test_objHash in github.com/supermekabu/go_utils/id" />
-      </list>
-    </recent_temporary>
+    <configuration name="go test go_utils_id" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="go_utils" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/supermekabu/go_utils/ids" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test go_utils_maps" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="go_utils" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <kind value="PACKAGE" />
+      <package value="github.com/supermekabu/go_utils/maps" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Go Test.go test go_utils_array" />
+      <item itemvalue="Go Test.go test go_utils_maps" />
+      <item itemvalue="Go Test.go test go_utils_id" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,7 +140,8 @@
     <MESSAGE value="rename Remove to RemoveFirst&#10;add RemoveAll" />
     <MESSAGE value="add id generators" />
     <MESSAGE value="ああああああaaaa" />
-    <option name="LAST_COMMIT_MESSAGE" value="ああああああaaaa" />
+    <MESSAGE value="aaaaaaaaaaaaaaaa" />
+    <option name="LAST_COMMIT_MESSAGE" value="aaaaaaaaaaaaaaaa" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
