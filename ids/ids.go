@@ -1,9 +1,10 @@
-package id
+package ids
 
 import (
 	"crypto/sha256"
 	"github.com/google/uuid"
 	"github.com/oklog/ulid"
+	"io"
 	"log"
 	"math/rand"
 	"time"
@@ -44,10 +45,18 @@ func objHash(obj []byte) uuid.UUID {
 
 /*
 	Generate sortable ULID
-	seed is now unix nano
+	seed is pre-generated entropy
 */
-func NewULID() string {
+func NewULID(entropy io.Reader) string {
 	t := time.Now()
-	entropy := ulid.Monotonic(rand.New(rand.NewSource(t.UnixNano())), 0)
 	return ulid.MustNew(ulid.Timestamp(t), entropy).String()
+}
+
+/*
+	Make entropy for ULID
+	seed is given unix nano
+*/
+func NewEntropy(t time.Time) io.Reader {
+	entropy := ulid.Monotonic(rand.New(rand.NewSource(t.UnixNano())), 0)
+	return entropy
 }
