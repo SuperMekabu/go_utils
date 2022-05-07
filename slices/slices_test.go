@@ -9,6 +9,46 @@ import (
 	"testing"
 )
 
+func TestChunk(t *testing.T) {
+	type args[T any] struct {
+		org       []T
+		chunkSize int
+	}
+
+	type test[M any] struct {
+		name string
+		args args[M]
+		want [][]M
+	}
+
+	tests := []test[int]{
+		{
+			name: "want OK",
+			args: args[int]{
+				org:       []int{1, 2, 3, 4, 5},
+				chunkSize: 2,
+			},
+			want: [][]int{{1, 2}, {3, 4}, {5}},
+		},
+		{
+			name: "want OK2",
+			args: args[int]{
+				org:       []int{1, 2, 3, 4, 5},
+				chunkSize: 1,
+			},
+			want: [][]int{{1}, {2}, {3}, {4}, {5}},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Chunk(tt.args.org, tt.args.chunkSize); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Chunk() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func TestFilter(t *testing.T) {
 	type args[T any] struct {
 		src []T
@@ -86,7 +126,7 @@ func TestFilter(t *testing.T) {
 func TestMap(t *testing.T) {
 	type args[T any, M any] struct {
 		src []T
-		fn  func(T) M
+		fn  func(T) (M, bool)
 	}
 
 	type test[K any, L any] struct {
@@ -95,29 +135,29 @@ func TestMap(t *testing.T) {
 		want []L
 	}
 
-	stringTests := []test[string, int]{
+	stringTests := []test[string, string]{
 		{
 			name: "string OK",
-			args: args[string, int]{
-				[]string{"1", "2", "3"},
-				func(t string) int {
-					parse, err := strconv.Atoi(t)
-					if err != nil {
-						return 0
+			args: args[string, string]{
+				[]string{"1A", "2A", "c", "4A"},
+				func(t string) (string, bool) {
+					if strings.HasSuffix(t, "A") {
+						return t, true
 					}
-					return parse
+					return "", false
 				},
 			},
-			want: []int{1, 2, 3},
+			want: []string{"1A", "2A", "4A"},
 		},
 	}
+
 	stringTests2 := []test[string, string]{
 		{
 			name: "string OK2",
 			args: args[string, string]{
 				[]string{"1", "2", "3"},
-				func(t string) string {
-					return fmt.Sprintf("%s:%s", t, t)
+				func(t string) (string, bool) {
+					return fmt.Sprintf("%s:%s", t, t), true
 				},
 			},
 			want: []string{"1:1", "2:2", "3:3"},
@@ -129,24 +169,11 @@ func TestMap(t *testing.T) {
 			name: "int OK",
 			args: args[int, float64]{
 				[]int{1, 2, 3, 4, 5},
-				func(t int) float64 {
-					return float64(t) / 2
+				func(t int) (float64, bool) {
+					return float64(t) / 2, true
 				},
 			},
 			want: []float64{0.5, 1.0, 1.5, 2.0, 2.5},
-		},
-	}
-
-	intTests2 := []test[int, int]{
-		{
-			name: "int OK2",
-			args: args[int, int]{
-				[]int{1, 2, 3, 4, 5},
-				func(t int) int {
-					return t * t
-				},
-			},
-			want: []int{1, 4, 9, 16, 25},
 		},
 	}
 
@@ -170,14 +197,6 @@ func TestMap(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Map(tt.args.src, tt.args.fn); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Map() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-
-	for _, tt := range intTests2 {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := Map(tt.args.src, tt.args.fn); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Filter() = %v, want %v", got, tt.want)
 			}
 		})
 	}
